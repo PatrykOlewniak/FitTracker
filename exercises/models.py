@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 
-class Exercise(models.Model):
+class Exercise(models.Model):       # TODO: simplify choices (unify)
     class MuscleGroup(models.TextChoices):
         SHOULDERS = 'SHOULDERS', _('Shoulders - Rotator Cuff')
         LEGS_H = 'LEGS_H', _('Legs - Hamstrings')
@@ -22,26 +22,31 @@ class Exercise(models.Model):
         CHEST = 'CHEST', _('Chest - Pectoralis')
         NOT_KNOWN = 'NOT_KNOWN', _('Not known')
 
-    class Level(models.IntegerField):
+    class Level(models.IntegerChoices):
         BEGINNER = 1, 'beginner'
         INTERMEDIATE = 2, 'intermediate'
         ADVANCED = 3, 'advanced'
 
     class BodyPart(models.TextChoices):
-        LOWER = 'Lower'
-        UPPER = 'Upper'
-        CORE = 'Core'
+        LOWER = 'Lower', 'Lower'
+        UPPER = 'Upper', 'Upper'
+        CORE = 'Core', 'Core'
+        NOT_KNOWN = 'Not known', 'Not known'
 
     class Modality (models.TextChoices):
         FW = 'FW', 'Free Weights'
         C = 'Cables', 'Cables'
         M = 'Machine', 'Machine'
+        NOT_KOWN = 'Not known', 'Not known'
 
-    class Joint(models.TextField):
-        MULTI = 'Multi-Joint Exercise'
-        SINGLE = 'Single-Joint Exercise'
+    class Joint(models.TextChoices):
+        MULTI = 'M', 'Multi-Joint Exercise'
+        SINGLE = 'S', 'Single-Joint Exercise'
+        NOT_KOWN = 'Not known', 'Not known'
 
     name = models.TextField(max_length=255)
-    muscle_group = models.TextField(
-        max_length=255, choices=MuscleGroup.choices, default=MuscleGroup.NOT_KNOWN
-    )
+    muscle_group = models.CharField(max_length=255, choices=MuscleGroup.choices, default=MuscleGroup.NOT_KNOWN)
+    level = models.IntegerField(choices=Level.choices, default=Level.BEGINNER)
+    body_part = models.CharField(max_length=255, choices=BodyPart.choices, default=BodyPart.NOT_KNOWN)
+    modality = models.CharField(max_length=255, choices=Modality.choices, default=Modality.NOT_KOWN)
+    joint = models.CharField(max_length=255, choices=Joint.choices, default=Joint.NOT_KOWN)
