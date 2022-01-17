@@ -1,0 +1,41 @@
+
+{% extends "base.html" %}
+
+
+{% block content %}
+  <h1>Exercises List</h1>
+  {% if exercise_list %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+    <table>
+<tr>
+  <th>Name</th>
+  <th>Muscle group</th>
+  <th>Level</th>
+  <th>Body part</th>
+  <th>Modality</th>
+<th>Joint</th>
+</tr>
+{% for exercise in exercise_list %}
+  <tr>
+    <th> {{ exercise.name }}</th>
+    <th> {{ exercise.get_muscle_group_display }}</th>
+    <th> {{ exercise.get_level_display }}</th>
+    <th> {{ exercise.get_body_part_display }}</th>
+    <th> {{ exercise.get_modality_display }}</th>
+    <th> {{ exercise.get_joint_display }}</th>
+  </tr>
+{% endfor %}
+</table>
+  {% else %}
+  {% if filter %}
+  <form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+{% endif %}
+    <p>There are no exercises in the library.</p>
+  {% endif %}
+{% endblock %}
