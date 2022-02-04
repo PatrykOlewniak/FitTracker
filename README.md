@@ -26,3 +26,10 @@ app comes.
 ## Usage / Installation
 
 Projects is in under construction phase. In the future should be docker runnable.
+
+Docker-compose:
+```
+docker-compose build
+
+docker-compose up
+```
