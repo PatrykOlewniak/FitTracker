@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Starting migrations [EntryPoint1]"
+echo "Starting migrations [EntryPoint]"
 
 if [ "$DATABASE" = "postgres" ]
 then
@@ -13,7 +13,7 @@ then
     echo "PostgreSQL started"
 fi
 
-python manage.py migrate --settings=FitTracker.settings.local  || exit 1
+python manage.py migrate --settings=FitTracker.settings.base  || exit 1
 
-echo "Finished migrations [EntryPoint1]"
+echo "Finished migrations [EntryPoint]"
 exec "$@"
