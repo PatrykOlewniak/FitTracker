@@ -4,6 +4,9 @@
 
 {% block content %}
   <h1>Exercises List</h1>
+<button type="button">
+    <a href="{% url 'create-exercise' %}">New exercise</a>
+</button>
   {% if exercise_list %}
   <form method="get">
     {{ filter.form.as_p }}
@@ -17,6 +20,8 @@
   <th>Body part</th>
   <th>Modality</th>
 <th>Joint</th>
+  <th>Updated at</th>
+  <th>Edit</th>
 </tr>
 {% for exercise in exercise_list %}
   <tr>
@@ -26,6 +31,8 @@
     <th> {{ exercise.get_body_part_display }}</th>
     <th> {{ exercise.get_modality_display }}</th>
     <th> {{ exercise.get_joint_display }}</th>
+    <th> {{ exercise.updated_at }}</th>
+    <th> <a href="{% url 'edit-exercise' exercise.pk %}">Edit</a></th>
   </tr>
 {% endfor %}
 </table>
