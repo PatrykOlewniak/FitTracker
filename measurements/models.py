@@ -8,7 +8,7 @@ class MeasureName(models.Model):
     name = models.CharField(max_length=128)
     generic = models.BooleanField(default=False)
     created_by = models.ForeignKey(
-        User, related_name='body_parts', blank=True, null=True, default=False, on_delete=models.SET_NULL)
+        User, related_name='body_parts', null=True, blank=True, default='', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name}'
