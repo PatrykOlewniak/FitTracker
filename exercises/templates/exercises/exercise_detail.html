@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise Detail</title>
+</head>
+<body>
+    <h2>{{ exercise.name }}</h2>
+    <p>{{ exercise.description }}</p>
+    {% if exercise.image %}
+    <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}" width="100" height="100">
+    {% else %}
+    No image
+    {% endif %}
+<form action="{% url 'exercise_delete' exercise.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Delete Exercise">
+</form>
+</body>
+</html>

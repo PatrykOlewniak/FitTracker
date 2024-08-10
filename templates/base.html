@@ -1,0 +1,42 @@
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        .username {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        FitTracker v0.0.1
+        <div class="username">
+            {% if user.is_authenticated %}
+                Logged in as: {{ user.username }}
+                <a href="{% url 'accounts:logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'accounts:login' %}">Login</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <nav>
+        {% if user.is_authenticated %}
+            <a href="{% url 'exercises_list' %}">Exercises</a>
+            <a href="{% url 'trainings_list' %}">Trainings</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Default content goes here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Your footer here -->
+    </footer>
+</body>
+</html>

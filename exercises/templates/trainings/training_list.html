@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Trainings</h2>
+  <a href="{% url 'training_new' %}">Create New Training</a>
+  <ul>
+    {% for training in trainings %}
+      <li>
+        <a href="{% url 'training_detail' training.id %}">{{ training.date }}</a>
+        <a href="{% url 'edit_training' training.id %}">Edit</a>
+        <a href="{% url 'training_delete' training.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

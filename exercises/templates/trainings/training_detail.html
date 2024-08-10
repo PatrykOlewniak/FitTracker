@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Training Details</h2>
+  <!-- Display the details of the training -->
+  <p>Date: {{ training.date }}</p>
+  <p>User: {{ training.user }}</p>
+  <p>Exercises: {{ training.exercises.all|join:", " }}</p>
+{% endblock %}

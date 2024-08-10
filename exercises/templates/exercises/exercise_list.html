@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Exercises
+{% endblock %}
+
+{% block content %}
+    <h2>Exercises</h2>
+    <a href="{% url 'exercise_new' %}">Create New Exercise</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Picture</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exercise in exercises %}
+            <tr>
+                <td>{{ exercise.name }}</td>
+                <td>{{ exercise.description }}</td>
+                <td>
+                    {% if exercise.image %}
+                    <img src="{{ exercise.image.url }}" alt="{{ exercise.name }}" width="100" height="100">
+                    {% else %}
+                    No image
+                    {% endif %}
+                    <a href="{% url 'edit_exercise' exercise.id %}">Edit</a>
+                <td>
+    <a href="{% url 'exercise_detail' exercise.id %}">{{ exercise.name }}</a>
+</td>
+
+                </td>
+
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No exercises yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

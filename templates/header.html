@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FitTracker</title>
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    <header>
+        <h1>FitTracker</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'accounts:login' %}">Login</a></li>
+                <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
